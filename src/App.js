@@ -4,6 +4,9 @@ import axios from 'axios';
 
 function App() {
     const [file, setFile] = useState(null);
+    const [filename, setFilename] = useState('');
+    const [question, setQuestion] = useState('');
+    const [answer, setAnswer] = useState('');
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
@@ -19,9 +22,25 @@ function App() {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            console.log(response.data);
+            setFilename(response.data.filename);
         } catch (error) {
             console.error('Error uploading file:', error);
+        }
+    };
+
+    const handleQuestionChange = (e) => {
+        setQuestion(e.target.value);
+    };
+
+    const handleAsk = async () => {
+        try {
+            const response = await axios.post('http://localhost:8000/ask', {
+                filename,
+                question,
+            });
+            setAnswer(response.data.answer);
+        } catch (error) {
+            console.error('Error asking question:', error);
         }
     };
 
@@ -29,6 +48,9 @@ function App() {
         <div className="App">
             <input type="file" onChange={handleFileChange} />
             <button onClick={handleUpload}>Upload PDF</button>
+            <input type="text" value={question} onChange={handleQuestionChange} placeholder="Ask a question" />
+            <button onClick={handleAsk}>Ask</button>
+            {answer && <p>Answer: {answer}</p>}
         </div>
     );
 }
