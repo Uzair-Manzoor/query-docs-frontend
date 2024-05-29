@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import './App.css'; // Import CSS file for styling
+import './App.css';
+import logo from './logo.svg';
 
 function App() {
     const [file, setFile] = useState(null);
     const [filename, setFilename] = useState('');
     const [question, setQuestion] = useState('');
-    const [answer, setAnswer] = useState('');
+    const [messages, setMessages] = useState([]);
+    const chatEndRef = useRef(null);
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
@@ -33,29 +35,55 @@ function App() {
     };
 
     const handleAsk = async () => {
+        const userMessage = { sender: 'user', text: question };
+        setMessages((prevMessages) => [...prevMessages, userMessage]);
+
         try {
             const response = await axios.post('http://localhost:8000/ask', {
                 filename,
                 question,
             });
-            setAnswer(response.data.answer);
+            const aiMessage = { sender: 'ai', text: response.data.answer };
+            setMessages((prevMessages) => [...prevMessages, aiMessage]);
         } catch (error) {
             console.error('Error asking question:', error);
         }
+        setQuestion('');
     };
+
+    useEffect(() => {
+        chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages]);
 
     return (
         <div className="App">
-            <h1>Document Query App</h1>
-            <div className="upload-section">
-                <input type="file" onChange={handleFileChange} />
-                <button onClick={handleUpload}>Upload PDF</button>
+            <nav className="navbar">
+                <div className="navbar-content">
+                    <img src={logo} alt="AI Planet Logo" className="logo" />
+                    <input type="file" onChange={handleFileChange} className="file-input" />
+                    <button onClick={handleUpload} className="upload-button">Upload PDF</button>
+                </div>
+            </nav>
+            <div className="chat-container">
+                <div className="chat-messages">
+                    {messages.map((message, index) => (
+                        <div key={index} className={`chat-message ${message.sender}`}>
+                            {message.text}
+                        </div>
+                    ))}
+                    <div ref={chatEndRef} />
+                </div>
+                <div className="input-container">
+                    <input
+                        type="text"
+                        value={question}
+                        onChange={handleQuestionChange}
+                        placeholder="Ask a question"
+                        className="question-input"
+                    />
+                    <button onClick={handleAsk} className="ask-button">Ask</button>
+                </div>
             </div>
-            <div className="question-section">
-                <input type="text" value={question} onChange={handleQuestionChange} placeholder="Ask a question" />
-                <button onClick={handleAsk}>Ask</button>
-            </div>
-            {answer && <p className="answer">Answer: {answer}</p>}
         </div>
     );
 }
