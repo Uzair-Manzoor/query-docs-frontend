@@ -1,31 +1,115 @@
 .App {
-  text-align: center;
-  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
 }
 
-h1 {
-  color: #333;
+.navbar {
+  width: 100%;
+  padding: 10px;
+  background-color: #ccdbcc;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.upload-section {
-  margin-bottom: 20px;
+.navbar-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  justify-content: space-between;
 }
 
-.question-section input[type="text"] {
-  width: 300px;
-  padding: 8px;
-  margin-right: 10px;
+.logo {
+  height: 40px;
 }
 
-.question-section button {
-  padding: 8px 16px;
-  background-color: #007bff;
-  color: #fff;
+.file-input {
+  display: none;
+}
+
+.upload-button {
+  padding: 10px;
   border: none;
+  border-radius: 5px;
+  background-color: #ffffff;
+  color: #4caf50;
   cursor: pointer;
 }
 
-.answer {
-  margin-top: 20px;
-  font-weight: bold;
+.upload-button:hover {
+  background-color: #f1f1f1;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 800px;
+  height: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-message {
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 80%;
+}
+
+.chat-message.user {
+  align-self: flex-end;
+  background-color: #dcf8c6;
+}
+
+.chat-message.ai {
+  align-self: flex-start;
+  background-color: #ececec;
+}
+
+.input-container {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.question-input {
+  flex: 1;
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.ask-button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+}
+
+.ask-button:hover {
+  background-color: #45a049;
 }
