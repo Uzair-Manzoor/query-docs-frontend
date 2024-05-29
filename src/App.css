@@ -8,9 +8,9 @@
 }
 
 .navbar {
-  width: 100%;
+  width: 98vw;
   padding: 10px;
-  background-color: #ccdbcc;
+  background-color: #fff;
   color: white;
   display: flex;
   justify-content: center;
@@ -21,12 +21,12 @@
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 800px;
+  max-width: 95%;
   justify-content: space-between;
 }
 
 .logo {
-  height: 40px;
+  height: 45px;
 }
 
 .file-input {
@@ -34,11 +34,12 @@
 }
 
 .upload-button {
-  padding: 10px;
-  border: none;
+  padding: 9px 50px;
+  border: 2px solid;
+  font-weight: 700;
   border-radius: 5px;
   background-color: #ffffff;
-  color: #4caf50;
+  color: #000000;
   cursor: pointer;
 }
 
@@ -50,14 +51,9 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  width: 100%;
-  max-width: 800px;
+  width: 98vw;
   height: 100%;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-top: 10px;
+  background-color: #f0f0f0;
   overflow: hidden;
 }
 
@@ -88,21 +84,23 @@
 
 .input-container {
   display: flex;
-  padding: 10px;
-  border-top: 1px solid #ccc;
-  background-color: #fff;
+  align-self: center;
+  max-width: 90%;
+  padding: 15px;
+  background-color: #f0f0f0;
 }
 
 .question-input {
   flex: 1;
   padding: 10px;
+  width: 800px;
   margin-right: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
 .ask-button {
-  padding: 10px;
+  padding: 10px 15px;
   border: none;
   border-radius: 5px;
   background-color: #4caf50;
