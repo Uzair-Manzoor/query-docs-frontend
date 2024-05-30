@@ -8,6 +8,14 @@ function App() {
   const [filename, setFilename] = useState('');
   const [question, setQuestion] = useState('');
   const [chat, setChat] = useState([]);
+  const [notification, setNotification] = useState('');
+
+  const showNotification = (message) => {
+    setNotification(message);
+    setTimeout(() => {
+      setNotification('');
+    }, 3000);
+  };
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -15,7 +23,7 @@ function App() {
 
   const handleUpload = async () => {
     if (!file) {
-      console.error('No file selected');
+      showNotification('No file selected');
       return;
     }
 
@@ -30,7 +38,7 @@ function App() {
       });
       setFilename(response.data.filename);
     } catch (error) {
-      console.error('Error uploading file:', error);
+      showNotification('Error uploading file');
     }
   };
 
@@ -40,7 +48,7 @@ function App() {
 
   const handleAsk = async () => {
     if (!filename) {
-      console.error('No file uploaded');
+      showNotification('No file uploaded');
       return;
     }
 
@@ -50,10 +58,10 @@ function App() {
         question,
       }));
       const { answer } = response.data;
-      setChat((prevChat) => [...prevChat, { question, answer }]);
+      setChat((prevChat) => [...prevChat, { id: new Date().getTime(), question, answer }]);
       setQuestion('');
     } catch (error) {
-      console.error('Error asking question:', error);
+      showNotification('Error asking question');
     }
   };
 
@@ -64,22 +72,25 @@ function App() {
           <img src={logo} alt="AI Planet Logo" className="logo" />
           <div className="navbar-content-button">
             <input type="file" onChange={handleFileChange} className="file-input" />
-            <button onClick={handleUpload} className="upload-button">
+            <button onClick={handleUpload} className="upload-button" type="button">
               <span className="plus">+</span>
               <span className="text">Upload PDF</span>
             </button>
           </div>
         </div>
       </nav>
+      {notification && <div className="notification">{notification}</div>}
       <div className="chat-screen">
-        {chat.map((item, index) => (
-          <div key={index} className="chat-item">
+        {chat.map((item) => (
+          <div key={item.id} className="chat-item">
             <p className="question">
               Q:
+              {' '}
               {item.question}
             </p>
             <p className="answer">
               A:
+              {' '}
               {item.answer}
             </p>
           </div>
@@ -92,7 +103,9 @@ function App() {
           onChange={handleQuestionChange}
           placeholder="Ask a question"
         />
-        <button className="ask-button" onClick={handleAsk}>Ask</button>
+        <button className="ask-button" onClick={handleAsk} type="button">
+          Ask
+        </button>
       </div>
     </div>
   );
