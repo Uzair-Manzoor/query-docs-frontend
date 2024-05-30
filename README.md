@@ -12,7 +12,7 @@
 2. Install dependencies: `pip install -r requirements.txt`
 3. Run the application: `uvicorn main:app --reload`
 
-### Follow the link for (Backend Source Code)[https://github.com/Uzair-Manzoor/query-docs-backend.git]
+### Follow the link for [Backend Source Code](https://github.com/Uzair-Manzoor/query-docs-backend.git)
 
 ## API Documentation
 
