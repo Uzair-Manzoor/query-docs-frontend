@@ -13,6 +13,7 @@
 3. Run the application: `uvicorn main:app --reload`
 
 ### Follow the link for [Backend Source Code](https://github.com/Uzair-Manzoor/query-docs-backend.git)
+### Follow the link for [Live Demo](https://ask-openai-theta.vercel.app/)
 
 ## API Documentation
 
