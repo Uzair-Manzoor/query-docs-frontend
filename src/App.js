@@ -31,7 +31,7 @@ function App() {
     formData.append('file', file);
 
     try {
-      const response = await axios.post('http://localhost:8000/upload', formData, {
+      const response = await axios.post('https://query-docs-backend.onrender.com/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -52,11 +52,16 @@ function App() {
       return;
     }
 
+    if (!question) {
+      showNotification('Please enter a question');
+      return;
+    }
+
     try {
-      const response = await axios.post('http://localhost:8000/ask', new URLSearchParams({
-        filename,
-        question,
-      }));
+      const response = await axios.post(
+        'https://query-docs-backend.onrender.com/ask',
+        { filename, question }, // Pass filename and question as an object
+      );
       const { answer } = response.data;
       setChat((prevChat) => [...prevChat, { id: new Date().getTime(), question, answer }]);
       setQuestion('');
@@ -84,12 +89,12 @@ function App() {
         {chat.map((item) => (
           <div key={item.id} className="chat-item">
             <p className="question">
-              Q:
+              user:
               {' '}
               {item.question}
             </p>
             <p className="answer">
-              A:
+              AI:
               {' '}
               {item.answer}
             </p>
@@ -99,6 +104,7 @@ function App() {
       <div className="input-container">
         <input
           type="text"
+          id="questionInput"
           value={question}
           onChange={handleQuestionChange}
           placeholder="Ask a question"
