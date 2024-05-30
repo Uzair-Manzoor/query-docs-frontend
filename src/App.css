@@ -1,7 +1,6 @@
 .App {
   display: flex;
   flex-direction: column;
-  align-items: center;
   height: 100vh;
   background-color: #f0f0f0;
   font-family: Arial, sans-serif;
@@ -13,7 +12,7 @@
   background-color: #fff;
   color: white;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
 }
 
@@ -21,7 +20,6 @@
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 95%;
   justify-content: space-between;
 }
 
@@ -29,14 +27,29 @@
   height: 45px;
 }
 
+.navbar-content-button {
+  display: flex;
+  flex-direction: row;
+}
+
 .file-input {
-  display: none;
+    color: rgb(53, 156, 77);
+    font-weight: 600;
+    align-self: center;
+}
+
+.plus {
+  border: 1px solid #000;
+  border-radius: 50%;
+  padding: 1px 4px;
+  margin-right: 10px;
+  font-weight: 400;
 }
 
 .upload-button {
-  padding: 9px 50px;
-  border: 2px solid;
-  font-weight: 700;
+  padding: 9px 20px;
+  border: 1px solid;
+  font-weight: 600;
   border-radius: 5px;
   background-color: #ffffff;
   color: #000000;
@@ -47,12 +60,10 @@
   background-color: #f1f1f1;
 }
 
-.chat-container {
+.chat-screen {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  width: 98vw;
-  height: 100%;
   background-color: #f0f0f0;
   overflow: hidden;
 }
@@ -61,25 +72,22 @@
   flex: 1;
   padding: 10px;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
+  background-color: #ffffff;
 }
 
-.chat-message {
-  margin: 5px 0;
+.chat-item {
+  margin-bottom: 10px;
   padding: 10px;
-  border-radius: 5px;
-  max-width: 80%;
+  border-radius: 10px;
+  background-color: #f1f1f1;
 }
 
-.chat-message.user {
-  align-self: flex-end;
-  background-color: #dcf8c6;
+.question {
+  font-weight: bold;
 }
 
-.chat-message.ai {
-  align-self: flex-start;
-  background-color: #ececec;
+.answer {
+  margin-top: 5px;
 }
 
 .input-container {
@@ -90,13 +98,14 @@
   background-color: #f0f0f0;
 }
 
-.question-input {
+input[type="text"] {
   flex: 1;
   padding: 10px;
   width: 800px;
   margin-right: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  margin-right: 10px;
 }
 
 .ask-button {
@@ -108,6 +117,27 @@
   cursor: pointer;
 }
 
-.ask-button:hover {
-  background-color: #45a049;
+button:hover {
+  background-color: #f5f5f5;
+}
+
+
+@media screen and (max-width: 680px) {
+
+  .file-input {
+    margin-left: 20px;
+  }
+
+  .upload-button {
+    padding: 7px;
+    margin-left: -45px;
+  }
+
+  .plus {
+    margin: 0;
+  }
+
+  .text {
+    display: none;   
+  }
 }
