@@ -93,7 +93,7 @@
   display: flex;
   align-self: center;
   max-width: 90%;
-  padding: 15px;
+  padding: 35px 15px;
   background-color: #f0f0f0;
 }
 
@@ -116,17 +116,17 @@ input[type="text"] {
 }
 
 button:hover {
-  background-color: #f5f5f5;
+  background-color: #348836;
 }
 
-@media screen and (max-width: 680px) {
+@media screen and (max-width: 630px) {
   .file-input {
     margin-left: 20px;
   }
 
   .upload-button {
     padding: 7px;
-    margin-left: -45px;
+    margin-left: -65px;
   }
 
   .plus {
