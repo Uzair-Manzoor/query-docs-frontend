@@ -64,11 +64,15 @@ function App() {
         { filename, question }, // Pass filename and question as an object
       );
       const { answer } = response.data;
-      setChat((prevChat) => [...prevChat, { id: new Date().getTime(), question, answer, isError: false }]);
+      setChat((prevChat) => [...prevChat, {
+        id: new Date().getTime(), question, answer, isError: false,
+      }]);
       setQuestion('');
     } catch (error) {
       const errorMessage = error.response?.data?.error || 'Error asking question';
-      setChat((prevChat) => [...prevChat, { id: new Date().getTime(), question, answer: errorMessage, isError: true }]);
+      setChat((prevChat) => [...prevChat, {
+        id: new Date().getTime(), question, answer: errorMessage, isError: true,
+      }]);
       showNotification(errorMessage);
     }
   };
