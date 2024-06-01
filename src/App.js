@@ -37,6 +37,7 @@ function App() {
         },
       });
       setFilename(response.data.filename);
+      showNotification('File uploaded successfully');
     } catch (error) {
       showNotification('Error uploading file');
     }
@@ -63,10 +64,12 @@ function App() {
         { filename, question }, // Pass filename and question as an object
       );
       const { answer } = response.data;
-      setChat((prevChat) => [...prevChat, { id: new Date().getTime(), question, answer }]);
+      setChat((prevChat) => [...prevChat, { id: new Date().getTime(), question, answer, isError: false }]);
       setQuestion('');
     } catch (error) {
-      showNotification('Error asking question');
+      const errorMessage = error.response?.data?.error || 'Error asking question';
+      setChat((prevChat) => [...prevChat, { id: new Date().getTime(), question, answer: errorMessage, isError: true }]);
+      showNotification(errorMessage);
     }
   };
 
@@ -87,7 +90,7 @@ function App() {
       {notification && <div className="notification">{notification}</div>}
       <div className="chat-screen">
         {chat.map((item) => (
-          <div key={item.id} className="chat-item">
+          <div key={item.id} className={`chat-item ${item.isError ? 'error' : ''}`}>
             <p className="question">
               user:
               {' '}
